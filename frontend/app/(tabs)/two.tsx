@@ -1,8 +1,10 @@
+import React from 'react';
+import type { FC } from 'react';
 import { Text, View } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 
-export default function TabTwoScreen() {
+const TabTwoScreen: FC = () => {
   return (
     <View>
       <Text>Tab Two</Text>
@@ -10,4 +12,6 @@ export default function TabTwoScreen() {
       <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );
-}
+};
+
+export default TabTwoScreen;

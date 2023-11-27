@@ -1,6 +1,8 @@
+import React from 'react';
+import type { FC } from 'react';
 import { Tabs } from 'expo-router';
 
-export default function TabLayout() {
+const TabLayout: FC = () => {
   return (
     <Tabs
       screenOptions={{
@@ -21,4 +23,6 @@ export default function TabLayout() {
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;

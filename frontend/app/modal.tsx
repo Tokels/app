@@ -1,13 +1,17 @@
+import React from 'react';
+import type { FC } from 'react';
 import { Text, View } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 
-export default function ModalScreen() {
+const ModalScreen: FC = () => {
   return (
     <View>
       <Text>Modal</Text>
       <View />
-      <EditScreenInfo path="app/modal.tsx" />
+      <EditScreenInfo />
     </View>
   );
-}
+};
+
+export default ModalScreen;

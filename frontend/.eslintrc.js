@@ -22,8 +22,9 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react'],
+  plugins: ['react', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     semi: 'off',
     '@typescript-eslint/semi': 'off',
     'comma-dangle': 'off',

@@ -1,14 +1,28 @@
 import * as SecureStore from 'expo-secure-store';
 
 export const secureStoreSave = async (key: string, value: string): Promise<void> => {
-  await SecureStore.setItemAsync(key, value);
+  try {
+    if (!value) {
+      throw 'Please enter a value';
+    }
+    await SecureStore.setItemAsync(key, value);
+    const storedValue = await SecureStore.getItemAsync(key);
+    if (storedValue === value) {
+      alert('Key successfully saved');
+    } else {
+      throw 'Something happened, please try again';
+    }
+  } catch (err) {
+    alert(err);
+  }
 };
 
 export const secureStoreGetValueFor = async (key: string): Promise<string> => {
-  const result = await SecureStore.getItemAsync(key);
-  if (result != null) {
-    return result;
-  } else {
+  try {
+    const storedValue = await SecureStore.getItemAsync(key);
+    return storedValue;
+  } catch (err) {
+    alert(err);
     return '';
   }
 };

@@ -1,15 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Button, Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import SecureStore from './SecureStore';
+import { View } from 'react-native';
 
 const EditScreenInfo: FC = () => {
-  return (
-    <View>
-      <SecureStore />
-    </View>
-  );
+  return <View></View>;
 };
 
 export default EditScreenInfo;

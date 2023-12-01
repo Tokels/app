@@ -7,6 +7,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+    "expo-env.d.ts", 
+    "cypress.config.js"  
+  ],
+  "exclude": ["cypress.config.js", "cypress", "node_modules"]
 }

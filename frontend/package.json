@@ -33,8 +33,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@babel/preset-typescript": "^7.23.3",
+    "@jest/globals": "^29.7.0",
     "@testing-library/react-native": "^12.4.0",
-    "@types/jest": "^29.5.10",
+    "@types/jest": "^29.5.11",
     "@types/mocha": "^10.0.6",
     "@types/react": "~18.2.14",
     "@types/react-native": "^0.72.7",
@@ -80,8 +82,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "jest": {
-  "setupFilesAfterEnv": ["jest-extended/all"]
   }
 }

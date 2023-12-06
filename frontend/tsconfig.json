@@ -3,15 +3,21 @@
   "compilerOptions": {
     "strict": true,
     "noEmit": true,
-    "types": ["react-native"],
-    "jsx": "react-native",
+    "types": [
+      "react-native"
+    ],
+    "jsx": "react-native"
   },
-  "include": ["**/*.tsx", "**/*.ts"],
+  "include": [
+    "**/*.tsx",
+    "**/*.ts",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ],
   "exclude": [
-    // "./src/**/*.spec.ts",     
-    // "./src/**/*.spec.tsx",     
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js"]
+    "jest.config.js"
+  ]
 }

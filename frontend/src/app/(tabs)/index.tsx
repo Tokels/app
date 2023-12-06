@@ -9,7 +9,7 @@ const TabOneScreen: FC = () => {
     <View>
       <Text>Tab One</Text>
       <View />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <EditScreenInfo />
     </View>
   );
 };

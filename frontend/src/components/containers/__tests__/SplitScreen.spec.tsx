@@ -2,6 +2,7 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'react-native';
 import SplitScreen from '../SplitScreen';
+import { expect, it } from '@jest/globals';
 
 it('Styles it correctly (flex)', () => {
   const tree = renderer
@@ -17,6 +18,10 @@ it('Styles it correctly (flex)', () => {
     )
     .toJSON();
 
-  const flex = (tree as any).children[3].props.style.flex === 2;
+  let flex;
+  if (tree) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+    flex = (tree as any).children[3].props.style.flex === 2;
+  }
   expect(flex).toBeTruthy();
 });

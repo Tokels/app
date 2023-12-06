@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react-native",
+    "types": ["jest"]
   },
+  "include": ["./src/**/*.spec.ts", "./src/**/*.spec.tsx"],
 }

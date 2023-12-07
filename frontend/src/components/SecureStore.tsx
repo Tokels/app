@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { secureStoreGetValueFor, secureStoreSave } from '../api';
 import { TextInput } from 'react-native-gesture-handler';
+import { handleGenericAsyncErrors } from '../utils';
 
 const styles = {
   container: 'items-center py-10 px-10',
@@ -19,6 +20,17 @@ const SecureStore: FC = () => {
   const [value, setValue] = useState('');
   const [result, setResult] = useState('(Placeholder for value)');
   const [setGetValueFromKey, setGetKey] = useState('');
+
+  const handlePress = async () => {
+    await secureStoreSave(key, value);
+    setValue('');
+    setKey('');
+  };
+
+  const handleSubmit = async () => {
+    const storedValue = await secureStoreGetValueFor(setGetValueFromKey);
+    setResult(storedValue);
+  };
 
   return (
     <View className={styles.container}>
@@ -42,14 +54,7 @@ const SecureStore: FC = () => {
         onChangeText={(text) => setValue(text)}
         value={value}
       />
-      <Pressable
-        className={styles.button}
-        onPress={() => {
-          secureStoreSave(key, value);
-          setValue('');
-          setKey('');
-        }}
-      >
+      <Pressable className={styles.button} onPress={handleGenericAsyncErrors(handlePress)}>
         <Text className={styles.buttonParagraph}>Save</Text>
       </Pressable>
 
@@ -62,10 +67,7 @@ const SecureStore: FC = () => {
         placeholder="Enter a key:"
         onChangeText={(text) => setGetKey(text.toLowerCase())}
         value={setGetValueFromKey}
-        onSubmitEditing={async () => {
-          const storedValue = await secureStoreGetValueFor(setGetValueFromKey);
-          setResult(storedValue);
-        }}
+        onSubmitEditing={handleGenericAsyncErrors(handleSubmit)}
       />
       <Text className={styles.h2}>{result}</Text>
     </View>

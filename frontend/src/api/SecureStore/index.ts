@@ -20,7 +20,10 @@ export const secureStoreSave = async (key: string, value: string): Promise<void>
 export const secureStoreGetValueFor = async (key: string): Promise<string> => {
   try {
     const storedValue = await SecureStore.getItemAsync(key);
-    return storedValue;
+    if (storedValue) {
+      return storedValue;
+    }
+    return '';
   } catch (err) {
     alert(err);
     return '';

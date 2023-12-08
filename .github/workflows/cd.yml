@@ -29,6 +29,7 @@ jobs:
         with:
           node-version: 16.x
           cache: yarn
+          cache-dependency-path: frontend/package-lock.json
 
       - name: 🛠️ Setup Expo
         uses: expo/expo-github-action@v7
@@ -39,7 +40,7 @@ jobs:
 
       - name: 🔎 Find yarn cache
         id: yarn-cache-path
-        run: echo "::set-output name=dir/frontend::$(yarn cache dir)"
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: 🛠️ Restore cache
         uses: actions/cache@v2

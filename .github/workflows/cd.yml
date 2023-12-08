@@ -1,4 +1,4 @@
-name: build
+name: CD
 on:
   push:
     branches:
@@ -39,7 +39,7 @@ jobs:
 
       - name: 🔎 Find yarn cache
         id: yarn-cache-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-output name=dir/frontend::$(yarn cache dir)"
 
       - name: 🛠️ Restore cache
         uses: actions/cache@v2

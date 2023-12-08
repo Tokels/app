@@ -1,4 +1,4 @@
-name: build
+name: CD
 on:
   push:
     branches:

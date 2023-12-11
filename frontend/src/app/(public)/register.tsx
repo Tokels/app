@@ -40,8 +40,8 @@ const Register = () => {
             className={styles.input}
             secureTextEntry
             placeholder="Confirm Password"
-            value={password}
-            onChangeText={setPassword}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
         </View>
         <View className={styles.buttonContainer}>

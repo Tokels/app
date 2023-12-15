@@ -1,48 +1,24 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, ActivityIndicator } from 'react-native';
+import React from 'react';
+import { Text, Pressable, Image } from 'react-native';
 import SplitScreen from '../../components/containers/SplitScreen';
-import { TextInput } from 'react-native-gesture-handler';
 import { Link } from 'expo-router';
-import { styles } from './common';
+import { styles } from './styles';
+import { useKeyboardStatus } from '../../providers/KeyboardsStatusProvider';
+import LoginForm from '../../components/LoginForm';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const { keyboardStatus } = useKeyboardStatus();
 
-  const handleLogin = () => {
-    setLoading(true);
-  };
-
-  return loading ? (
-    <SplitScreen>
-      <ActivityIndicator />
-    </SplitScreen>
-  ) : (
-    <SplitScreen styleParent={styles.rootContainer}>
-      <View></View>
-      <SplitScreen>
-        <View className={styles.inputContainer}>
-          <TextInput
-            className={styles.input}
-            placeholder="name@tokl.com"
-            value={email}
-            onChangeText={setEmail}
-          />
-          <TextInput
-            className={styles.input}
-            secureTextEntry
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-          />
-        </View>
-        <View className={styles.buttonContainer}>
-          <Pressable className={styles.button} onPress={handleLogin}>
-            <Text>Login</Text>
-          </Pressable>
-        </View>
-      </SplitScreen>
+  return (
+    <SplitScreen weigths={[3, 2, 1]} styleParent={styles.rootContainer}>
+      <Image
+        className={`w-3/4 h-3/4 ${keyboardStatus && 'hidden'}`}
+        resizeMode={'contain'}
+        source={{
+          uri: 'https://res.cloudinary.com/di6owew6n/image/upload/v1702297467/adaptive-icon_uhhmdv.png',
+        }}
+      />
+      <LoginForm isLogin={true} />
       <Link href={'/(public)/register'} asChild>
         <Pressable className={styles.link}>
           <Text>Create new account</Text>

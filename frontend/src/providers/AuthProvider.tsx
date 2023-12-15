@@ -9,7 +9,7 @@ import { regex } from '../utils/regex';
 const { manifest2 } = Constants;
 
 const API_URL =
-  'http://' + manifest2?.extra?.expoGo?.debuggerHost?.replace(/:8081/, ':8080/api/users');
+  'http://' + manifest2?.extra?.expoGo?.debuggerHost?.replace(/:8081/, ':8080/api/auth');
 const JWT_KEY = 'user-token';
 
 type AuthProps = {

@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import React, { ReactElement, createContext, useContext, useState } from 'react';
 import Constants from 'expo-constants';
-import { useError } from './ErrorProvider';
+import { useToast } from './ToastProvider';
+import { useLoading } from './LoadingProvider';
 const { manifest2 } = Constants;
 
 const API_URL =
@@ -23,45 +24,56 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [token, setToken] = useState(false);
-  const { setError } = useError();
+  const { setToast } = useToast();
+  const { setLoading } = useLoading();
 
   const handleLogin = async (email: string, password: string): Promise<void> => {
     try {
+      setLoading!(true);
       const result: AxiosResponse = await axios.post(`${API_URL}/authenticate`, {
         email,
         password,
       });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const token: boolean = result?.data;
-      setToken(token);
-      return;
+      if (token) {
+        setToast!((p) => ({ ...p, success: 'Logged in' }));
+        setToken(token);
+      }
     } catch (err) {
       if (err instanceof AxiosError) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        setError!(err?.response?.data);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const error: string = err?.response?.data;
+        setToast!((s) => ({ ...s, error }));
       } else {
         console.error(err);
       }
+    } finally {
+      setLoading!(false);
     }
-    return;
   };
 
   const handleRegister = async (email: string, password: string): Promise<void> => {
     try {
+      setLoading!(true);
       const result = await axios.post(`${API_URL}/`, { email, password });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const token: boolean = result?.data;
-      setToken(token);
-      return;
+      if (token) {
+        setToast!((p) => ({ ...p, success: 'Account created' }));
+        setToken(token);
+      }
     } catch (err) {
       if (err instanceof AxiosError) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        setError!(err?.response?.data);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const error: string = err?.response?.data;
+        setToast!((s) => ({ ...s, error }));
       } else {
         console.error(err);
       }
+    } finally {
+      setLoading!(false);
     }
-    return;
   };
 
   const handleLogout = () => {

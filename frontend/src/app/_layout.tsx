@@ -1,18 +1,17 @@
 import { Slot } from 'expo-router';
 import React from 'react';
-import { AuthProvider, KeyboardStatusProvider, LoadingProvider } from '../providers';
-import { ErrorProvider } from '../providers/ErrorProvider';
+import { AuthProvider, KeyboardStatusProvider, LoadingProvider, ToastProvider } from '../providers';
 
 const RootLayout = () => {
   return (
     <LoadingProvider>
-      <ErrorProvider>
+      <ToastProvider>
         <KeyboardStatusProvider>
           <AuthProvider>
             <Slot />
           </AuthProvider>
         </KeyboardStatusProvider>
-      </ErrorProvider>
+      </ToastProvider>
     </LoadingProvider>
   );
 };

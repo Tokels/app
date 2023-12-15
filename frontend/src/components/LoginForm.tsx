@@ -2,8 +2,6 @@ import React, { FC, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useAuth } from '../providers/AuthProvider';
-import { useLoading } from '../providers/LoadingProvider';
-import { useError } from '../providers/ErrorProvider';
 
 const styles = {
   input:
@@ -31,44 +29,24 @@ const LoginForm: FC<LoginFormProps> = ({ isLogin }) => {
   const [email, setEmail] = useState(__DEV__ ? 'julias@tokl.com' : '');
   const [password, setPassword] = useState(__DEV__ ? '1234Julia!' : '');
   const [confirmPassword, setConfirmPassword] = useState(__DEV__ ? '1234Julia!' : '');
-  const { setLoading } = useLoading();
-  const { setError } = useError();
   const { onLogin, onRegister } = useAuth();
 
   const handleLogin = async () => {
-    try {
-      setLoading!(true);
-      await onLogin!(email, password);
-      return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      // console.error(err);
-    } finally {
-      setLoading!(false);
-    }
+    await onLogin!(email, password);
   };
 
   const handleRegistration = async () => {
-    try {
-      setLoading!(true);
-      if (!verifyInput(email, regex.email)) {
-        throw new Error('Provide valid email');
-      }
-      if (!verifyInput(password, regex.password)) {
-        throw new Error('Provide safer password');
-      }
-      if (password !== confirmPassword) {
-        throw new Error("Passwords don't match");
-      }
-      await onRegister!(email, password);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      if (err instanceof String) {
-        setError!(err.toString());
-      }
-    } finally {
-      setLoading!(false);
+    if (!verifyInput(email, regex.email)) {
+      throw new Error('Provide valid email');
     }
+    if (!verifyInput(password, regex.password)) {
+      throw new Error('Provide safer password');
+    }
+    if (password !== confirmPassword) {
+      throw new Error("Passwords don't match");
+    }
+    await onRegister!(email, password);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   };
 
   return (

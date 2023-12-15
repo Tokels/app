@@ -12,23 +12,14 @@ const styles = {
   buttonContainer: 'w-full',
 };
 
-const regex = {
-  email: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-  password: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-};
-
-const verifyInput = (input: string, regex: RegExp): boolean => {
-  return regex.test(input);
-};
-
 interface LoginFormProps {
   isLogin: boolean;
 }
 
 const LoginForm: FC<LoginFormProps> = ({ isLogin }) => {
-  const [email, setEmail] = useState(__DEV__ ? 'julias@tokl.com' : '');
-  const [password, setPassword] = useState(__DEV__ ? '1234Julia!' : '');
-  const [confirmPassword, setConfirmPassword] = useState(__DEV__ ? '1234Julia!' : '');
+  const [email, setEmail] = useState(__DEV__ ? 'test@tokl.com' : '');
+  const [password, setPassword] = useState(__DEV__ ? '123Julia!' : '');
+  const [confirmPassword, setConfirmPassword] = useState(__DEV__ ? '123Julia!' : '');
   const { onLogin, onRegister } = useAuth();
 
   const handleLogin = async () => {
@@ -36,16 +27,7 @@ const LoginForm: FC<LoginFormProps> = ({ isLogin }) => {
   };
 
   const handleRegistration = async () => {
-    if (!verifyInput(email, regex.email)) {
-      throw new Error('Provide valid email');
-    }
-    if (!verifyInput(password, regex.password)) {
-      throw new Error('Provide safer password');
-    }
-    if (password !== confirmPassword) {
-      throw new Error("Passwords don't match");
-    }
-    await onRegister!(email, password);
+    await onRegister!(email, password, confirmPassword);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   };
 

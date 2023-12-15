@@ -1,13 +1,39 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Stack } from 'expo-router';
+import { Slot, useRouter, useSegments } from 'expo-router';
+import React, { useEffect } from 'react';
+import { AuthProvider, KeyboardStatusProvider, LoadingProvider, ToastProvider } from '../providers';
+import { useAuth } from '../providers/AuthProvider';
 
-const RootLayout: FC = () => {
+const InitialLayout = () => {
+  const { token, initialized } = useAuth();
+  const router = useRouter();
+  const segments = useSegments();
+
+  useEffect(() => {
+    if (!initialized) return;
+
+    const inAuthGroup = segments[0] === '(auth)';
+
+    if (token && !inAuthGroup) {
+      router.replace('/(auth)/profile');
+    } else if (!token && inAuthGroup) {
+      router.replace('/(public)/login');
+    }
+  }, [token, initialized]);
+
+  return <Slot />;
+};
+
+const RootLayout = () => {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-    </Stack>
+    <KeyboardStatusProvider>
+      <LoadingProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <InitialLayout />
+          </AuthProvider>
+        </ToastProvider>
+      </LoadingProvider>
+    </KeyboardStatusProvider>
   );
 };
 

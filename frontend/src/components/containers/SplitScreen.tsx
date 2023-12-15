@@ -2,7 +2,7 @@ import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { View } from 'react-native';
 interface SplitScreenProps {
-  children: ReactElement[];
+  children: ReactElement[] | ReactElement;
   weigths?: number[];
   row?: boolean;
   styleChildren?: string;
@@ -18,22 +18,36 @@ const SplitScreen: FC<SplitScreenProps> = ({
   styleParent = '',
   centered = true,
 }) => {
+  let w: number[];
   // If no weigths are provided, w (weights) will default to 1 per element
-  const w = weigths?.length > 0 ? weigths : children.map(() => 1);
+  if (Array.isArray(children)) {
+    w = weigths?.length > 0 ? weigths : children.map(() => 1);
+  }
   return (
-    <View className={`flex flex-${row ? 'row' : 'col'} h-full w-full ${styleParent}`}>
-      {children.map((component, idx) => {
-        const flex = w[idx];
-        return (
-          <View
-            className={`${centered && 'justify-center items-center'} ${styleChildren}`}
-            key={`splitscreen-pane-${idx}-${component.key}`}
-            style={{ flex }}
-          >
-            {component}
-          </View>
-        );
-      })}
+    <View className={`flex flex-${row ? 'row' : 'col'}  h-full w-full ${styleParent} absolute`}>
+      {Array.isArray(children) ? (
+        children.map((component, idx) => {
+          const flex = w[idx];
+          return (
+            <View
+              className={`${
+                centered && 'justify-center items-center'
+              } w-full h-full ${styleChildren}`}
+              key={`splitscreen-pane-${idx}-${component.key}`}
+              style={{ flex }}
+            >
+              {component}
+            </View>
+          );
+        })
+      ) : (
+        <View
+          className={`h-full w-full ${centered && 'justify-center items-center'} ${styleChildren} `}
+          style={{ flex: weigths[0] }}
+        >
+          {children}
+        </View>
+      )}
     </View>
   );
 };

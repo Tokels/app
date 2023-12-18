@@ -6,7 +6,6 @@ import React, {
   useContext,
   useState,
 } from 'react';
-import { ActivityIndicator } from 'react-native';
 
 type LoadingProps = {
   loading: boolean;
@@ -29,7 +28,6 @@ export const LoadingProvider = ({ children }: { children: ReactElement }) => {
         setLoading,
       }}
     >
-      <ActivityIndicator />
       {children}
     </LoadingContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Tabs } from 'expo-router';
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import { useAuth } from '../../providers/AuthProvider';
@@ -6,8 +6,8 @@ import { useAuth } from '../../providers/AuthProvider';
 const InsideLayout = () => {
   const { onLogout } = useAuth();
   return (
-    <Stack>
-      <Stack.Screen
+    <Tabs>
+      <Tabs.Screen
         name="dashboard"
         options={{
           headerTitle: 'My Card',
@@ -18,9 +18,9 @@ const InsideLayout = () => {
           ),
         }}
       />
-      <Stack.Screen name="edit_card" options={{ headerTitle: 'Edit Card' }} />
-      <Stack.Screen name="add_card" options={{ headerTitle: 'Edit Card' }} />
-    </Stack>
+      <Tabs.Screen name="edit_card" options={{ headerTitle: 'Edit Card' }} />
+      <Tabs.Screen name="add_card" options={{ headerTitle: 'Edit Card' }} />
+    </Tabs>
   );
 };
 

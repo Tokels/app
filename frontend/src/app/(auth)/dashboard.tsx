@@ -3,7 +3,7 @@ import Card from '../../components/Card';
 import AuthorizedCards from '../../components/AuthorizedCards';
 import { View } from 'react-native';
 
-const Dashboard = () => {
+const DashboardPage = () => {
   return (
     <View>
       <Card />
@@ -12,4 +12,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

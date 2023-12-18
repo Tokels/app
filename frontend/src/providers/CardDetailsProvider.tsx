@@ -7,7 +7,6 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { secureStoreGetValueFor } from '../api';
 
 export const CARD_DETAILS = 'CARD_DETAILS';
@@ -60,7 +59,6 @@ export const CardDetailsProvider = ({ children }: { children: ReactElement }) =>
         setCardDetails,
       }}
     >
-      <ActivityIndicator />
       {children}
     </CardDetailsContext.Provider>
   );

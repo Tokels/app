@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const Profile = () => {
+const AddCard = () => {
   return (
     <View>
-      <Text className="text-xl">Profile</Text>
+      <Text className="text-xl">AddCard</Text>
     </View>
   );
 };
 
-export default Profile;
+export default AddCard;

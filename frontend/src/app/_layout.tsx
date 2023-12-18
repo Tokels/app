@@ -1,6 +1,12 @@
 import { Slot, useRouter, useSegments } from 'expo-router';
 import React, { useEffect } from 'react';
-import { AuthProvider, KeyboardStatusProvider, LoadingProvider, ToastProvider } from '../providers';
+import {
+  AuthProvider,
+  CardDetailsProvider,
+  KeyboardStatusProvider,
+  LoadingProvider,
+  ToastProvider,
+} from '../providers';
 import { useAuth } from '../providers/AuthProvider';
 
 const InitialLayout = () => {
@@ -14,7 +20,7 @@ const InitialLayout = () => {
     const inAuthGroup = segments[0] === '(auth)';
 
     if (token && !inAuthGroup) {
-      router.replace('/(auth)/profile');
+      router.replace('/(auth)/dashboard');
     } else if (!token && inAuthGroup) {
       router.replace('/(public)/login');
     }
@@ -29,7 +35,9 @@ const RootLayout = () => {
       <LoadingProvider>
         <ToastProvider>
           <AuthProvider>
-            <InitialLayout />
+            <CardDetailsProvider>
+              <InitialLayout />
+            </CardDetailsProvider>
           </AuthProvider>
         </ToastProvider>
       </LoadingProvider>

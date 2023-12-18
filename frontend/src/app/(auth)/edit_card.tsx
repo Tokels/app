@@ -5,7 +5,7 @@ import { useToast } from '../../providers/ToastProvider';
 import { CARD_DETAILS, useCardDetails } from '../../providers/CardDetailsProvider';
 import { secureStoreSave } from '../../api';
 
-const EditCard = () => {
+const EditCardPage = () => {
   const { setToast } = useToast();
   const { cardDetails, setCardDetails } = useCardDetails();
 
@@ -92,4 +92,4 @@ const EditCard = () => {
   );
 };
 
-export default EditCard;
+export default EditCardPage;

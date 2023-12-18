@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const AddCard = () => {
+const AddCardPage = () => {
   return (
     <View>
       <Text className="text-xl">AddCard</Text>
@@ -9,4 +9,4 @@ const AddCard = () => {
   );
 };
 
-export default AddCard;
+export default AddCardPage;

@@ -84,7 +84,7 @@ const EditCard = () => {
         </View>
       </View>
       {toggleSave && (
-        <Pressable onPress={handleSave}>
+        <Pressable onPress={() => void handleSave}>
           <Text>Save</Text>
         </Pressable>
       )}

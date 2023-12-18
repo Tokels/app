@@ -8,9 +8,9 @@ const InsideLayout = () => {
   return (
     <Stack>
       <Stack.Screen
-        name="profile"
+        name="dashboard"
         options={{
-          headerTitle: 'My Profile',
+          headerTitle: 'My Card',
           headerRight: () => (
             <Pressable onPress={onLogout}>
               <Text>Log Out</Text>
@@ -18,6 +18,8 @@ const InsideLayout = () => {
           ),
         }}
       />
+      <Stack.Screen name="edit_card" options={{ headerTitle: 'Edit Card' }} />
+      <Stack.Screen name="add_card" options={{ headerTitle: 'Edit Card' }} />
     </Stack>
   );
 };

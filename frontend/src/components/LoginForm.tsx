@@ -17,8 +17,8 @@ interface LoginFormProps {
 }
 
 const LoginForm: FC<LoginFormProps> = ({ isLogin }) => {
-  const [email, setEmail] = useState(__DEV__ ? 'test@tokl.com' : '');
-  const [password, setPassword] = useState(__DEV__ ? '123Julia!' : '');
+  const [email, setEmail] = useState(__DEV__ ? 'jane@tokl.com' : '');
+  const [password, setPassword] = useState(__DEV__ ? '123Jane!' : '');
   const [confirmPassword, setConfirmPassword] = useState(__DEV__ ? '123Julia!' : '');
   const { onLogin, onRegister } = useAuth();
 

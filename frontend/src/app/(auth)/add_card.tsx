@@ -1,12 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import AddEditCard from '../../components/AddEditCard';
 
 const AddCardPage = () => {
-  return (
-    <View>
-      <Text className="text-xl">AddCard</Text>
-    </View>
-  );
+  return <AddEditCard />;
 };
 
 export default AddCardPage;

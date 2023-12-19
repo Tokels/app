@@ -8,23 +8,17 @@ import React, {
   useState,
 } from 'react';
 import { secureStoreGetValueFor } from '../api';
+import { CardDetailsPrivate } from '../api/CardsApi/data/types';
 
 export const CARD_DETAILS = 'CARD_DETAILS';
 
-type CardDetails = {
-  cardNumber: string;
-  cardHolder: string;
-  cardEndDateMM: string;
-  cardEndDateYY: string;
-  cardCvv: string;
-};
-
 type CardDetailsProps = {
-  cardDetails: CardDetails;
-  setCardDetails: Dispatch<SetStateAction<CardDetails>>;
+  cardDetails: CardDetailsPrivate;
+  cardDetailsSecureStore: CardDetailsPrivate;
+  setCardDetails: Dispatch<SetStateAction<CardDetailsPrivate>>;
 };
 
-const cardDetailsInit: CardDetails = {
+export const cardDetailsInit: CardDetailsPrivate = {
   cardNumber: '',
   cardHolder: '',
   cardEndDateMM: '',
@@ -40,22 +34,31 @@ export function useCardDetails() {
 
 export const CardDetailsProvider = ({ children }: { children: ReactElement }) => {
   const [cardDetails, setCardDetails] = useState(cardDetailsInit);
+  const [cardDetailsSecureStore, setCardDetailsSecureStore] = useState(cardDetailsInit);
 
   useEffect(() => {
     const loadCardDetails = async () => {
       const cardDetails = await secureStoreGetValueFor(CARD_DETAILS);
       if (cardDetails) {
-        setCardDetails(JSON.parse(cardDetails) as CardDetails);
+        setCardDetails(JSON.parse(cardDetails) as CardDetailsPrivate);
+        setCardDetailsSecureStore(JSON.parse(cardDetails) as CardDetailsPrivate);
       }
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     loadCardDetails();
   }, []);
 
+  useEffect(() => {
+    if (cardDetails) {
+      setCardDetailsSecureStore(cardDetails);
+    }
+  }, [cardDetails]);
+
   return (
     <CardDetailsContext.Provider
       value={{
         cardDetails,
+        cardDetailsSecureStore,
         setCardDetails,
       }}
     >

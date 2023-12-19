@@ -1,7 +1,7 @@
 import { useRoute } from '@react-navigation/native';
 import { Link } from 'expo-router';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { useCardDetails } from '../providers/CardDetailsProvider';
 
 const Card = () => {
@@ -21,11 +21,9 @@ const Card = () => {
         </View>
         <Text>{cardDetails?.cardCvv || '***'}</Text>
       </View>
-      {!/edit/.test(route.name) && (
+      {/dashboard/.test(route.name) && (
         <Link href={'/(auth)/edit_card'} asChild>
-          <Pressable>
-            <Text>Edit Card</Text>
-          </Pressable>
+          <Button title="Edit Card" />
         </Link>
       )}
     </View>
